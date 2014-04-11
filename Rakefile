@@ -9,7 +9,8 @@ ssh_port       = "22"
 document_root  = "~/website.com/"
 rsync_delete   = false
 rsync_args     = ""  # Any extra arguments to pass to rsync
-deploy_default = "rsync"
+deploy_default = "s3"
+s3_bucket      = 'eng.grandroundshealth.com'
 
 # This will be configured for you when you run config_deploy
 deploy_branch  = "gh-pages"
@@ -364,6 +365,13 @@ task :setup_github_pages, :repo do |t, args|
   end
   puts "\n---\n## Now you can deploy to #{repo_url} with `rake deploy` ##"
 end
+
+desc "Deploy website via s3cmd with CloudFront cache invalidation"
+task :s3 do
+  puts "## Deploying website via s3cmd"
+  ok_failed system("s3cmd sync --acl-public --reduced-redundancy  public/* s3://#{s3_bucket}/")
+end
+
 
 def ok_failed(condition)
   if (condition)

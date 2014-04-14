@@ -3,7 +3,8 @@ layout: post
 title: "Intermediate Certificates with Sendmail"
 date: 2014-04-11 14:00:05 -0700
 comments: true
-categories: 
+categories:
+author: Ken Berland
 ---
 We got a certificate for our mailserver from Comodo. We constructed a .pem file in the usual [way][1] and set sendmail to eat the file in the `sendmail.cf`. The operative lines are these:
 

@@ -24,7 +24,7 @@ We got a certificate for our mailserver from Comodo. We constructed a .pem file 
 
 However, after testing the connection, nobody was happy:
 
-    openssl s_client -starttls smtp -crlf -connect mail.hero.com:587
+    $ openssl s_client -starttls smtp -crlf -connect mail.hero.com:587
     CONNECTED(00000004)
     depth=0 OU = Domain Control Validated, OU = PositiveSSL, CN = mail.hero.com
     verify error:num=20:unable to get local issuer certificate

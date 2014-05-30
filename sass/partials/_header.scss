@@ -1,8 +1,6 @@
 body > header {
   background: $header-bg;
   h1 {
-    display: inline-block;
-    margin: 0;
     a, a:visited, a:hover {
       color: $title_color;
       text-decoration: none;
@@ -13,11 +11,28 @@ body > header {
     }
   }
   h2 {
-    display: inline-block;
-    margin: .2em 0 0;
     @extend .sans;
-    font-size: 1.5em;
+    line-height: 65px;
+    font-size: 1em;
     color: $subtitle-color;
-    font-weight: normal;
+    font-variant: small-caps;
+    letter-spacing: .2em;
+    font-weight: 300;
+  }
+  h1, h2 {
+    text-align: left;
+    float: left;
+    margin: 0 .25em 0 0;
+    @media only screen and (max-width: 480px) {
+      float: none;
+      text-align: center;
+      margin-right: 0;
+    }
+  }
+  h2 {
+    @media only screen and (max-width: 480px) {
+      line-height: 1em;
+      font-size: 1.5em;
+    }
   }
 }

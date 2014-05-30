@@ -15,7 +15,7 @@ Everything in Ruby is a class. Your controllers are classes too.
 We wanted to mock the real controller to be able to execute its methods in the context of a request dispatch. We started by creating a new instance of class that inherits from the real controller and includes various action_controller pieces to mock just enough of the dispatch path to be able to render a response without full rendering.
 We then create a new global constant, our mocked version of the real controller.
 
-```ruby
+```
 def self.create_mocker_class(controller)
     new_class = Class.new(controller) do |klass|
       include ActionController::Rendering
@@ -76,7 +76,7 @@ def self.create_mocker_class(controller)
 
 lastly we override mail method of the ActionMailer to create an instantiate a mock controller based on the params, set the current_user (if necessary for context) and call the action method on the controller and render the response to a string that gets passed to the super method to do the actual mailing
 
-```ruby
+```
 def mail(options, &block)
    params = Rails.application.routes.recognize_path(options[:path], method: (options[:method] || 'GET'))
    mock_controller = self.class.define_or_initialize_by_controller("#{params[:controller].camelize}Controller".constantize)
@@ -91,7 +91,7 @@ def mail(options, &block)
 
 now we can have nice mailers to email existing views (albeit without styling):
 
-```ruby
+```
 class ReportMailer < ViewMailer
 
   def tps_report

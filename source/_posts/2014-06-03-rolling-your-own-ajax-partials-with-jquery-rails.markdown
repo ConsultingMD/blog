@@ -6,15 +6,15 @@ comments: true
 categories: frontend parjax jquery
 ---
 
-With the advent of Rails 4 we were introduced to a new featured called [Turbolinks](https://github.com/rails/turbolinks).  Turbolinks is a gem that optimizes browser rendering by bypassing the need for the browser to recompile styles and scripts for every page.  This is done by using Ajax to make requests to the server and only updating the body and title of the page to bypass rendering of any assets included in the HTML head.
+With the advent of Rails 4 we were introduced to a new featured called [Turbolinks](https://github.com/rails/turbolinks).  Turbolinks is a gem that speeds DOM rendering on the browser by bypassing the need to recompile styles and scripts on every page.  This is done by using Ajax to make requests to the server and then updating the entire `<body>` (and `<title>`) of the page. This bypasses the rendering of any assets included in the HTML `<head>`.
 
-[Pjax](https://github.com/defunkt/jquery-pjax) is a similar gem to Turbolinks but instead of rendering the entire page pjax renders partials and replaces only designated elements within the page with the response from the server.  Pjax has an advantage over Turbolinks in that it does not require the server to render or deliver the entire page to the browser.  This can be a very benifitial enhancement for clients that constrained by bandwidth or processing power limitations.
+[Pjax](https://github.com/defunkt/jquery-pjax) is a similar gem to Turbolinks but, instead of rendering the entire page, pjax renders partials and replaces only designated elements within the page with the response from the server.  Pjax has an advantage over Turbolinks in that it does not require the server to render or deliver the entire page to the browser.  This can be a very beneficial enhancement for clients that are constrained by bandwidth or processing power limitations.
 
-But what we wanted to employ some of these optimizations but didn't want to leverage a gem.  Often times it is beneficial to build a tailored solution and in this case we'll do it in about 20 lines of code.
+We wanted a Pjax-like solution but were unwilling to use the Pjax gem.  We wanted a lighter solution. And in this case, we'll do it in about 20 lines of code.
 
 ### Getting started
 
-First to get off to a good start let's create a new [jQuery plugin](http://learn.jquery.com/plugins/) which will encapsulate our functionality.  Here we will start with a simple jQuery plugin template that defines as `parjax` within the jQuery function namespace.
+First, to get off to a good start, let's create a new [jQuery plugin](http://learn.jquery.com/plugins/) which will encapsulate our functionality.  Here we will start with a simple jQuery plugin template that defines `parjax` within the jQuery function namespace.
 
 ``` javascript
 // jquery.parjax.js
@@ -27,7 +27,7 @@ First to get off to a good start let's create a new [jQuery plugin](http://learn
 })(jQuery);
 ```
 
-We now have the ability to invoke the plugin on a set of jquery elements, using the familiar jQuery selector based chaining syntax.
+We now have the ability to invoke the plugin on a set of jquery elements, using the familiar jQuery selector-based chaining syntax.
 
 Let's do this by adding the following to our controller's client code.  In our example, it's `part1.js.coffee` and we will enhance all anchor elements to our new plugin.
 
@@ -156,9 +156,9 @@ $ ->
 
 ### Current Limitations
 
-We have implemented Ajax partials in Rails in under 20 lines of code.   Although very lean, it is not very robust and should only be used as is in certain situations.
+We have implemented Ajax partials in Rails in under 20 lines of code.   It's lean, but not bullet-proof.
 
-The main limitation is the state of the application not being preserved by the browser.  If the user refreshes the page they will essentially "start over".  We will address this in a future blog post by implementing [pushState()](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history) support and exploring fallbacks for browsers that do not support this feature.
+The main limitation is that the state of the application not being preserved by the browser.  If the user refreshes the page, they will essentially "start over".  We will address this in a future blog post by implementing [pushState()](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history) support and exploring fallbacks for browsers that do not support this feature.
 
 We will also touch on implementing plugin options, transition animations, support for request failures, form submissions, redirects, and nested parjax views.  We will also look into further optimization including how to respond with only the rendered partial instead of the entire web page.
 

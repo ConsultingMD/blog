@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "jQuery Datepicker Moving with Page Scroll on Mobile"
+title: "Keeping jQuery Datepicker in Place on Mobile"
 date: 2014-07-29 10:44:18 -0700
 comments: true
 categories:
 ---
 
-While scrolling on a page with jQuery datepicker open, the datepicker is fixed at a certain position on the page. However, when scrolling on a mobile app, the datepicker begins scrolling with the page and appears to be fixed at a certain position on the screen as opposed to the page. The datepicker becomes out of sync with the input box and floats on the screen as you scroll.
+While scrolling on a page with jQuery datepicker open, the datepicker normally behaves fixed at a certain position on the page. However, when using it in a mobile app, this is not what we see. The datepicker begins scrolling with the page and appears to be fixed at a certain position on the screen as opposed to the page. It becomes out of sync with the input box and floats on the screen.
 
 After inspecting the datepicker, we discover `ui-datepicker-div` is appended to the end of the body. The datepicker thinks its position is relative to the screen and not the page which is what we want. We try two solutions to fix this problem. One, move the datepicker into a div relative to the panel of the page scroll and two, hide the datepicker when the page is scrolled.
 

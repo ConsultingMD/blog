@@ -22,13 +22,13 @@ All you need is *Ruby* and *Rails* installed in order to use it. Make sure you a
 gem install zeus
 ```
 
-After you’ve instaledl it, you can use the zeus command to start it up:
+After you’ve installed it, you can use the zeus command to start it up:
 
 ```
 zeus start
 ```
 
-You’ll see zeus come up and it’ll list the availble commands:
+You’ll see zeus come up and it’ll list the available commands:
 
 ```
 [ready] [crashed] [running] [connecting] [waiting]
@@ -80,7 +80,7 @@ If you find that you don’t use one or more of the commands, you can remove the
 
 ####Using Zeus
 
-Now that you got Zeus installed and running, it's time to experience the awesome! Nearly all of the commands you normally run in Rails, you can now run in zeus. Note, that you no longer need to prefix the commands with *bundle exec* when using zeus. Here's a list of all the commands availble:
+Now that you got Zeus installed and running, it's time to experience the awesome! Nearly all of the commands you normally run in Rails, you can now run in zeus. Note, that you no longer need to prefix the commands with *bundle exec* when using zeus. Here's a list of all the commands available:
 
 ```
 zeus console
@@ -97,7 +97,7 @@ zeus runner
 
 
 
-When you start up your server with zeus, you'll notice that it seems to come up instantly. That's because zeus has pe-loaded the environment and the Rails app.
+When you start up your server with zeus, you'll notice that it seems to come up instantly. That's because zeus has pre-loaded the environment and the Rails app.
 
 ```
 rconda@localhost: ~/Projects/mysampleapp $ zeus s
@@ -126,9 +126,9 @@ Beyond the normal server commands, zeus also speeds up running tests, or in my c
 zeus rspec spec/models/user_spec.rb
 ```
 
-You'll notice that there is vertually no load time. The specs start running right away. 
+You'll notice that there is virtually no load time. The specs start running right away.
 
-You mmay also want to remove the *auto* commands from spec_helper.rb They are known to cause issues when running with zeus:
+You may also want to remove the *auto* commands from spec_helper.rb They are known to cause issues when running with zeus:
 
 ```
  - require 'rspec/autotest'

@@ -366,9 +366,9 @@ task :setup_github_pages, :repo do |t, args|
   puts "\n---\n## Now you can deploy to #{repo_url} with `rake deploy` ##"
 end
 
-desc "Deploy website via s3cmd with CloudFront cache invalidation"
+desc "Deploy website using s3"
 task :s3 do
-  puts "## Deploying website via s3cmd"
+  puts "## Deploying website using s3"
   ok_failed system("aws s3 cp --recursive --acl public-read public/ s3://#{s3_bucket}/")
 end
 

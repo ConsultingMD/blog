@@ -5,7 +5,7 @@ date: 2014-11-16 12:16:58 -0800
 comments: true
 categories:
 ---
-I often get razzed by OSX users for compiling a kernel.  Suffice to say, I don't understand it as a complaint or a put-down.  Controlling your kernel is an important part of understanding the stack.  And running the same OS in production as on your desktop can teach you leesons that later save your save you time or save your ass.
+I often get razzed by OSX users for compiling a kernel.  Suffice to say, I don't understand it as a complaint or a put-down.  Controlling your kernel is an important part of understanding the stack.  And running the same OS in production as on your desktop can teach you lessons that later save you time (or save your ass).
 
 Anyway, compiling a new kernel is pretty simple in ubuntu:
 

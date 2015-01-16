@@ -32,6 +32,8 @@ killall xcape &> /dev/null
 ~/bin/xcape -e 'Caps_Lock=Escape'
 ```
 
+Finally, a clipboard manager will keep track of your copy+paste history. Highly recommended. ([Alfred](http://www.alfredapp.com/) for OSX, [Parcellite](http://parcellite.sourceforge.net/?page_id=10) for Linux)
+
 
 ### Editor
 

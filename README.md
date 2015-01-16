@@ -1,6 +1,6 @@
 # Blogging
 
-## Installing Octopress
+### Installing Octopress
 Clone this repo, and assuming you have rvm setup nicely, just bundle install.  It will create a new gemset called `octopress`.
 
 ```
@@ -14,7 +14,7 @@ To run the blog in a non-static, "development" mode, use:
 rake preview
 ```
 
-## To Create a Page
+### To Create a Page
 
 ```bash
 $ rake new_post["title"]
@@ -36,7 +36,7 @@ The file has a couple of lines of YAML at the top that define the layout, title,
 Edit `source/_posts/2014-04-11-title.markdown` with the appropriate markdown to make your blog article AWESOME.
 
 
-## To push the changes
+### To push the changes
 
 To generate the new static pages:
 

@@ -7,7 +7,7 @@ categories: tools
 author: Alex Bird
 ---
 
-If I was into wishing I would wish there was a way to directly hook my brain up to a computer so I didn't have to use a keyboard and mouse all day. "They" will probably come up with that at some point, but for now I'm stuck with the current offerings. Fortunately, some of the tools and shortcuts available to developers are simply delightful. I'd like to share some of the ones I've discovered recently, and hopefully encourage you to explore for yourself.
+If I were in to wishing, I would wish there was a way to directly hook my brain up to a computer so I didn't have to use a keyboard and mouse all day. "They" will probably come up with that at some point, but for now I'm stuck with the current offerings. Fortunately, some of the tools and shortcuts available to developers are simply delightful. I'd like to share some of the ones I've discovered recently, and hopefully encourage you to explore for yourself.
 
 There is a balance to be found between customizing everything and utilizing every shortcut, and learning a system's standard tools. It takes a lot of experimenting to figure out a good set of tools -- editor, shell, etc, and it's well worth it, but you'd do better by not customizing everything into some pimp-my-ride monstrocity. You won't be able to remember all the crap you have setup anyway. Nobody else will have any idea how to use your system and similarly, you will feel disabled when you log in to servers or pair on someone else's machine. It's important to keep exploring better ways of doing things, but don't go crazy.
 

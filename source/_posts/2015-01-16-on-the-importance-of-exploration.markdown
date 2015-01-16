@@ -18,7 +18,7 @@ The mental overhead of adopting a new workflow is considerable. It's best to try
 
 No matter what tools you use, having a faster key repeat and delay speed will be better. If you're used to slower speeds, that's okay. You will also get used to faster speeds. You can ease into faster settings by slowly ramping up until you find your sweet spot. Of course it will feel weird at first, but it's one of those things where if you can get used to it, you'll cringe when you have to go back. The fastest OSX defaults are artificially limited to not-fast-enough values, but you can increase them more with a tool called <a href="https://pqrs.org/osx/karabiner/" target="_blank">Karabiner</a>.
 
-Tools that rely heavily on `CTRL` and `ESC` can benefit from the following: remap left `CTRL` to `CAPS LOCK`. The trade-off of not having a `CAPS LOCK` key is outweighed by having `CTRL` significantly more accessible. Even better, you can map left `CTRL` to `CAPS LOCK` _only_ when it is pressed in combination with another key. When pressed alone it becomes `ESC`. This may sound wacky, but it's just simple enough for your muscle memory to actually pick it up and gets rid of a lot of unnecessary reaching. It also doesn't affect the usability of your keyboard for those unfamiliar with your setup. (also see Karabiner for OSX, and xcape for Linux)
+Tools that rely heavily on `CTRL` and `ESC` can benefit from the following: remap left `CTRL` to `CAPS LOCK`. The trade-off of not having a `CAPS LOCK` key is outweighed by having `CTRL` significantly more accessible. Even better, you can map left `CTRL` to `CAPS LOCK` _only_ when it is pressed in combination with another key. When pressed alone it becomes `ESC`. This may sound wacky, but it's just simple enough for your muscle memory to actually pick it up and gets rid of a lot of unnecessary reaching. It also doesn't affect the usability of your keyboard for those unfamiliar with your setup. (also see <a href="https://pqrs.org/osx/karabiner/" target="_blank">Karabiner</a> for OSX, and <a href="https://github.com/alols/xcape" target="_blank">xcape</a> for Linux)
 
 Linux example:
 
@@ -32,7 +32,7 @@ killall xcape &> /dev/null
 ~/bin/xcape -e 'Caps_Lock=Escape'
 ```
 
-Finally, a clipboard manager will keep track of your copy+paste history. Highly recommended. ([Alfred](http://www.alfredapp.com/) for OSX, [Parcellite](http://parcellite.sourceforge.net/?page_id=10) for Linux)
+Finally, a clipboard manager will keep track of your copy+paste history. Highly recommended. (<a href="http://www.alfredapp.com/" target="_blank">Alfred</a> for OSX, <a href="http://parcellite.sourceforge.net/?page_id=10" target="_blank">Parcellite</a> for Linux)
 
 
 ### Editor
@@ -43,7 +43,7 @@ Lately, I've been all about search as my primary way to navigate code, and any e
 
 For smaller movements, however, there are so many possibilities of cursor movement that it's impossible to not have to use the arrow keys or a cumbersome equivalent. I don't like the arrow keys, and I don't like you if you use them (just kidding). The world beyond arrow keys is wonderful. If you've ever wondered why someone would bother learning something as arcane as VIM, one of the main reasons is that it provides so many efficient ways to make local-level cursor movements. There are so many that it's literally impossible to know about them all, and you sometimes find yourself rediscovering them without being aware of having known them before, but yet also having a stirring in your deep memory of something old and familiar like events from a past life.
 
-Searching for small movements is then possible too. EasyMotion is a plugin that lets you jump to any visible character in three keystrokes. (EasyMotion: VIM - https://github.com/Lokaltog/vim-easymotion, Emacs - http://www.emacswiki.org/emacs/AceJump, Sublime - https://github.com/tednaleid/sublime-EasyMotion)
+Searching for small movements is then possible too. EasyMotion is a plugin that lets you jump to any visible character in three keystrokes. (EasyMotion: <a href="https://github.com/Lokaltog/vim-easymotion" target="_blank">VIM</a>, <a href="http://www.emacswiki.org/emacs/AceJump" target="_blank">Emacs</a>, <a href="https://github.com/tednaleid/sublime-EasyMotion" target="_blank">Sublime</a>)
 
 Press the EasyMotion activation key, my my case `s`:
 
@@ -62,7 +62,7 @@ I'm not saying it's bad to just move around with arrow keys, but that there is e
 
 ### Shell
 
-Bash has a ton of functionality out of the box and it feels great to be able to log into servers with a completely standard Bash without losing productivity. There are lots of great shortcuts to learn: http://www.skorks.com/2009/09/bash-shortcuts-for-maximum-productivity/. One not mentioned there that I've been using a lot is `CTRL-d` at an empty prompt, which ends your current login, and potentially closes the tab/window/remote session.
+Bash has a ton of functionality out of the box and it feels great to be able to log into servers with a completely standard Bash without losing productivity. <a href="http://www.skorks.com/2009/09/bash-shortcuts-for-maximum-productivity/" target="_blank">There are lots of great shortcuts to learn</a>. One not mentioned there that I've been using a lot is `CTRL-d` at an empty prompt, which ends your current login, and potentially closes the tab/window/remote session.
 
 
 Here are some other Bash goodies:
@@ -84,7 +84,7 @@ hi
 ```
 
 
-Autojump (https://github.com/joelthelion/autojump), although not really related to Bash, is a tool that lets you quickly cd to your most used directories. It keeps track of which directories you cd to, and automatically jumps you to your most used directories with the fewest characters possible:
+<a href="https://github.com/joelthelion/autojump" target="_blank">Autojump</a>, although not really related to Bash, is a tool that lets you quickly cd to your most used directories. It keeps track of which directories you cd to, and automatically jumps you to your most used directories with the fewest characters possible:
 
 ```
 bird@bird-840: /tmp/$ ls

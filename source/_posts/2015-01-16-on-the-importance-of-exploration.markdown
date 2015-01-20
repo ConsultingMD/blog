@@ -158,7 +158,7 @@ There are some handy git aliases as well for your .gitconfig, which work in tand
   co = checkout
   d  = diff
 # show the commit graph
-  lg = log --graph
+  lg = log --graph --decorate
   st = status
 ```
 

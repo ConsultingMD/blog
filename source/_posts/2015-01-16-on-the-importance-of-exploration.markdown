@@ -71,7 +71,7 @@ Here are some other Bash goodies:
 # in .bashrc
 # search through history with up/down arrows
 bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'"]]"'
+bind '"\e[B": history-search-forward'
 ```
 
 !$ expands to the last argument of the last command:

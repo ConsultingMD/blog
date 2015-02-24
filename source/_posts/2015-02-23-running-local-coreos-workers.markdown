@@ -8,19 +8,19 @@ author: Ken Berland <ken@grandroundshealth.com>
 ---
 We're working with CoreOS here, both in the cloud and locally.  For 24/7 workloads, local servers are far
 more cost effective than "big iron"-type instances in the cloud, like c3.8xlarge or r3.8xlarge.  These can be around
-$2/hour, so running locally for things like continuous integration can pay back in a month of less.
+$2/hour, so running locally for things like continuous integration can pay back in a month or less.
 
 Here's how to boot a local worker using a CoreOS USB image and have it upgrade automatically.
 
 ### Make a bootable USB from the stock CoreOS image.
 
-- Insert your USB stick and make note of the device, here `/dev/sdb`.
-- Download the stable CoreOS iso.  Later, in you cloud-config, you can choose from stable, beta, or alpha.
+- Insert your USB stick and make note of the device, here we're using `/dev/sdb`.
+- Download the stable CoreOS .iso.  Later, in you cloud-config, you can choose from stable, beta, or alpha.
 ```
 wget http://stable.release.core-os.net/amd64-usr/current/coreos_production_iso_image.iso
 ```
 
-- Your cloud-config should be available on the web.  Create a `syslinux.cfg` that knows where it is:
+- Your cloud-config that we'll create below will be available on the web.  Create a `syslinux.cfg` that knows where it is:
 
 ```
 cat <<EOF > syslinux.cfg
@@ -69,6 +69,8 @@ sync # you can never be too careful
 ```
 
 ### Create a cloud-config that Auto-Updates
+
+Below, we've listed the complete cloud-config.yml.  Here is a bit of explanation of the individual pieces.
 
 - you'll want your local instance to use local storage.  So, add services that format
 the local disk as btrfs and labels it so Docker can find it:
@@ -260,3 +262,7 @@ ssh_authorized_keys:
 - |
   ssh-rsa AAAAB3NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA== another@grandrounds.com
 ```
+
+### Done!
+
+Now you've got a powerful CoreOS worker locally for a fraction of the 24/7 price at AWS or another cloud provider.  Enjoy.

@@ -7,11 +7,11 @@ categories: intern internship Waterloo coop
 author: Justin Ahn
 ---
 Coming from the [University of Waterloo](https://uwaterloo.ca) [Cooperative Education](http://en.wikipedia.org/wiki/Cooperative_education) is a big
-deal to me.
+deal to me.  
 Such a big deal, that one of the first things I did was help create and maintain our Coop program.
 
 The goal of a successful Coop program is to not only benefit the Host Company, but also enrich the student with information and work experience they
-might not have otherwise experienced.
+might not have otherwise experienced.  
 As such, here are a few basic tenants that I believe help achieve this.
 
 ### 1. Don't put them on their own special project that lasts the internship ###
@@ -38,5 +38,5 @@ go, the same as everyone else.
 Sometimes the coop student won't be working directly under you.  Perhaps they're working on an offshoot branch of your team.  Perhaps you have dynamic teams.
 In any case, it's often easy to for the Coop to be working on tasks that you might not be directly overseeing.
 
-This doesn't necessary mean formal reviews, and sitdowns.  But it's good practice to ensure you're speaking regularly.
+This doesn't necessary mean formal reviews, and sitdowns.  But it's good practice to ensure you're speaking regularly.  
 Make sure that the work being given is of interest with the coop student, and that the coop student is achieving work that is meaningful for the company.

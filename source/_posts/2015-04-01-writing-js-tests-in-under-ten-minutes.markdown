@@ -9,8 +9,8 @@ Writing javascript tests are actually quite simple with the tools we have at our
 
 ##Getting Started
 
-1. Add the konacha gem as a dependency in our Gemfile
-2. Download sinon.js and add it to our javascript vendor assets(will come in handy when we want to stub the server or travel in time:))
+1. Add the konacha gem as a dependency in your Gemfile
+2. Download sinon.js and add it to your javascript vendor assets(will come in handy when we want to stub the server or travel in time:))
 3. Create a spec/javascripts directory
 
 ##Writing Tests(the good part)

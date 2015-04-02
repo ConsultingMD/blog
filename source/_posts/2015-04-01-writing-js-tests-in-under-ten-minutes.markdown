@@ -52,6 +52,8 @@ input id='foo'
 
 And finally, we add our test file: spec/javascripts/test_spec.js.coffee
 ```
+#running your tests in the terminal: 'bundle exec rake konacha:run'
+#browser: 'bundle exec rake konacha:serve'
 #= require spec_helpers
 #= require test
 

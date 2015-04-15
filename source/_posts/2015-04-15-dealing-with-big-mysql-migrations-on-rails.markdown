@@ -25,7 +25,7 @@ Let's identify what are our main concerns regarding this important migration.
 - We want to be able to write to the table the entire time
 - We don't want to lose the integrity of the data 
 
-Great!, we already have one of the bullet points covered, locking the table doesn't prevent us from reading from the table, so let's move to the next one.
+Great! We already have one of the bullet points covered, locking the table doesn't prevent us from reading from the table, so let's move to the next one.
 
 Since we want to be able to write to the table the entire time we won't be able to migrate our table without getting some tooling in place and handle the transaction differently. Probably the easiest way to migrate our table and not lock our application when it tries to write to our table is to have our model write to a different table.
 

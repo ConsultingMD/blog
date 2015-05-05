@@ -29,7 +29,7 @@ Great! We already have one of the bullet points covered, locking the table doesn
 
 Since we want to be able to write to the table the entire time we won't be able to migrate our table without getting some tooling in place and handle the transaction differently. Probably the easiest way to migrate our table and not lock our application when it tries to write to our table is to have our model write to a different table.
 
-How do we get our model to use a new table? Well we have to options for this. 
+How do we get our model to use a new table? Well we have two options for this. 
 
 - We can tell our model the name of it's new table, like so.
 ```

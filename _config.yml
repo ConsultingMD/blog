@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://www.grandroundshealth.com
+url: http://www.grandrounds.com
 title: Grand Rounds Engineering
 subtitle: Engineering
 author: Engineering
@@ -19,7 +19,7 @@ date_format: "ordinal"
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email: engineering@grandroundshealth.com
+email: engineering@grandrounds.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #

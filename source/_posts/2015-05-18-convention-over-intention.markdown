@@ -52,20 +52,20 @@ With apologies to [Joseph Stein](https://youtu.be/7V2lxFWBqfI):
     And make me some perfect crap!
 ```
 
-OK, so maybe I'm over-reacting, but I'm coming to agree with [Bill
+OK, so maybe I'm over-reacting (actually, there's no maybe about it), but I'm coming to agree with [Bill
 Karwin](http://stackoverflow.com/users/20860/bill-karwin): Rails polymorphic
 associations are an anti-pattern.
 
-Bill's point is valid: SQL DBMSs have a firm separation between meta-data and
+Bill's point is certainly valid: SQL DBMSs have a firm separation between meta-data and
 data, and any attempt to finesse this separation will cause you to lose some of
 the significant features of SQL (e.g., foreign key constraints).
 
-But I've never been a SQL lover (I'm a Quel guy at heart), and my current
+But I've never been a SQL lover (I still have a soft spot for Quel), and my current
 environment is all-Rails-all-the-time, so issues around declaring foreign keys
-and SQL constraints are less applicable; I can rely on Rails features instead
-of DBMS features. So let me tell you why they're an anti-pattern in our case.
+and SQL constraints are less applicable: I can rely on Rails features instead
+of DBMS features.
 
-Imagine that you have a model that uses a non-integer primary key:
+So let me tell you why they're an anti-pattern in our case.  Imagine that you have a model that uses a non-integer primary key (uh-oh, that's not **Convention**):
 ```
 class MyCaseGyration < ActiveRecord::Migration
   create_table "cases", :id => false do |t|
@@ -80,12 +80,12 @@ class Case < ActiveRecord::Base
   self.primary_key = 'identifier'
 end
 ```
-(Oh, how I miss DataMapper, where I could know what my model's properties were from a single file....)
+(The (source)[https://github.com/ConsultingMD/polymorphic_assoc] for this article is available)
 
 Imagine you have a few other models that use normal auto-incremented ``id`` fields. For the sake of this
 example, let's use a silly User table:
 ```
-class MyUserGyration < ActiveRecordMigration
+class MyUserGyration < ActiveRecord::Migration
   create_table "users" do |t|
     t.string   "name"
   end
@@ -103,6 +103,7 @@ audit changes to these tables. We will have two problems:
 
 1. We'll have to patch the gem.
 2. And then the generated SQL will only work for very slow definitions of "work"
+3. Unless we upgrade out of Rails 3.2
 
 ### We need to patch the gem
 
@@ -148,15 +149,11 @@ it has a perfectly good table name and id.
 
 ### But...
 
-But ActiveRecord is _really_ conventional.  And in particular, it doesn't
-*care* what the declared type of a database field is, or even what comes along
+But ActiveRecord -- at least in Rails 3.2 -- is _really_ conventional.  And in particular, it doesn't
+care what the declared type of a database field is, or even what comes along
 with a column definition, unless it really has to.  So let's say you want to
-find the latest version of a Case:
-
-```
-```
-
-You'll get what you want, since the case id is actually a string in this case:
+find the latest version of a Case.
+You'll get what you want, since the case id is actually a string:
 
 ```
   2.1.5 :016 > kase = Case.first
@@ -187,7 +184,7 @@ No.  Look right after that first equal sign in the SELECT. MySQL (tested with 5.
 ```
 That is, it has no idea that you meant `'1'`, not `1`. And since we're
 effectively transforming every value in the table in order to make the
-comparison, it _wonn't use an index on it_.
+comparison, MySQL _won't use an index on it_.
 
 You can see that by comparing the EXPLAIN PLAN output for both of those
 queries:
@@ -214,7 +211,7 @@ queries:
 In our situation, where we have millions of audit entries, that's a disaster.
 
 I could argue that this is MySQL's fault: it should just raise an
-exception since you used an integer constant where a string comparison
+exception since you used an integer constant where a string constant
 is required.  But I also think this is yet another case where Rails' conventional
 thinking breaks down as soon as you do anything out of the ordinary.
 
@@ -222,10 +219,10 @@ thinking breaks down as soon as you do anything out of the ordinary.
 
 ### Be relational, not object-oriented
 
-Mr. [Karwin](http://stackoverflow.com/users/20860/bill-karwin) suggests that the
+[Mr. Karwin](http://stackoverflow.com/users/20860/bill-karwin) suggests that the
 whole approach of the gem is wrong, since it uses SQL in a non-relational
 manner.  But finding an alternative is complicated: this isn't the only
-polymorphic assocation on the Audited model. There are actually __three__:
+polymorphic assocation on the Audited model. There are actually three:
 
 * The ``auditable`` association to the object modified
 * The ``associated`` association to an object that the auditable object was associated with (to make it easier to find all changes to an object that has many associations, e.g., all order changes for a customer).
@@ -236,10 +233,6 @@ from the database's perspective: the associations only make sense to Rails
 code, not to general SQL users, visualization systems, etc., and they impose
 Rails conventions on any other user of the DBMS.  In our case, we don't care,
 but that only makes sense in a pure Rails shop.
-
-To see if we can use some SQL alternatives, we'll make the Case associated with a
-User (the user may own many cases, the case is owned by its user). So both our models are ``audited``, and
-the User model ``has_associated_audits``. See the example source on Github for more details.
 
 Karwin suggests three alternatives:
 
@@ -267,7 +260,7 @@ the idea would be to create an 'auditables' table. Any creation of an auditable
 object (say `cases`) would also create one tuple in `auditables`.  Then to get
 the audits for my Case, I join through its `auditable` entry to get its audits.
 I.e., ``:case belongs_to :auditable``, and ``:auditable has_many :audits``. But how
-would those audits reference the other objects?
+would those audits reference the other objects? Hmm. Still reading.
 
 ### Avoid the ORM
 
@@ -277,12 +270,12 @@ Unfortunately, I couldn't find a way to patch ``audited`` to do this
 (overriding the generated association accessor wasn't reliable: it'd work in
 development and production, but not with rspec, for example).
 
-This is the solution we used, though: we just used a different method name to
+This is the solution we used: we just used a different method name to
 implement the access we needed.
 
 ### Fix the ORM
 
-This turns out the be the best quick answer: In Rails 4.2, Arel generates
+This turns out the be a pretty good answer: In Rails 4.2, Arel generates
 the correct query for the type of the column:
 
 ```

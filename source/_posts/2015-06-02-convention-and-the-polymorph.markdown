@@ -7,7 +7,9 @@ categories: SQL, Rails, Auditing, Fiddler on the Roof
 author: Rick Cobb
 ---
 
-# Polymorphic associations can drive you insane
+or
+
+### Polymorphic associations can drive you insane
 
 With apologies to [Joseph Stein](https://youtu.be/7V2lxFWBqfI):
 
@@ -60,9 +62,9 @@ With apologies to [Joseph Stein](https://youtu.be/7V2lxFWBqfI):
     And make me some perfect crap!
 ```
 
-OK, so maybe I'm over-reacting (actually, there's no maybe about it), but I'm coming to agree with [Bill
-Karwin](http://stackoverflow.com/users/20860/bill-karwin): Rails polymorphic
-associations are an anti-pattern.
+OK, so maybe I'm over-reacting (actually, there's no maybe about it), but I'm
+coming to agree with [Bill Karwin](http://stackoverflow.com/users/20860/bill-karwin):
+Rails polymorphic associations are an anti-pattern.
 
 Bill's point is certainly valid: SQL DBMSs have a firm separation between meta-data and
 data, and any attempt to finesse this separation will cause you to lose some of
@@ -88,7 +90,7 @@ class Case < ActiveRecord::Base
   self.primary_key = 'identifier'
 end
 ```
-(The (source)[https://github.com/ConsultingMD/polymorphic_assoc] for this article is available)
+(Github has the [working source](https://github.com/ConsultingMD/polymorphic_assoc) for this article.)
 
 Imagine you have a few other models that use normal auto-incremented ``id`` fields. For the sake of this
 example, let's use a silly User table:
@@ -107,7 +109,7 @@ end
 Now, since you're a good open-source Rails coder who doesn't repeat oneself --
 nor anybody else you can find on Rubygems or via StackOverflow -- imagine you'd
 like to use the [audited](https://github.com/collectiveidea/audited) gem to
-audit changes to these tables. We will have two problems:
+audit changes to these tables. We will have two problems and a foreshadowing:
 
 1. We'll have to patch the gem.
 2. And then the generated SQL will only work for very slow definitions of "work"
@@ -115,7 +117,7 @@ audit changes to these tables. We will have two problems:
 
 ### We need to patch the gem
 
-* The gem itself will want to create a model like this (taking some liberties with the [source](https://github.com/collectiveidea/audited/blob/master/lib/generators/audited/templates/install.rb)):
+The gem itself will want to create a model like this (taking some liberties with the [source](https://github.com/collectiveidea/audited/blob/master/lib/generators/audited/templates/install.rb)):
 ```
 class AuditMigration < ActiveRecord::Migration
   def self.up
@@ -132,7 +134,7 @@ class AuditMigration < ActiveRecord::Migration
 end
 ```
 
-* and DSL-generated associations like:
+It will also generate associations like:
 ```
    class User
      has_many :audits, :as => :auditable
@@ -157,11 +159,12 @@ it has a perfectly good table name and id.
 
 ### But...
 
-But ActiveRecord -- at least in Rails 3.2 -- is _really_ conventional.  And in particular, it doesn't
-care what the declared type of a database field is, or even what comes along
-with a column definition, unless it really has to.  So let's say you want to
-find the latest version of a Case.
-You'll get what you want, since the case id is actually a string:
+But ActiveRecord -- at least in Rails 3.2 -- is _really_ conventional.  And in
+particular, it doesn't care what the declared type of a database field is, or
+even what comes along with a column definition, unless it really has to. It
+just trusts the objects you pass in to be the right type.  So let's say you
+want to find the latest version of a Case.  You'll get what you want, since the
+case id is actually a string:
 
 ```
   2.1.5 :016 > kase = Case.first
@@ -218,10 +221,13 @@ queries:
 
 In our situation, where we have millions of audit entries, that's a disaster.
 
-I could argue that this is MySQL's fault: it should just raise an
-exception since you used an integer constant where a string constant
-is required.  But I also think this is yet another case where Rails' conventional
-thinking breaks down as soon as you do anything out of the ordinary.
+I could rail against MySQL here instead of ActiveRecord: MySQL __should__
+return an error since you used an integer constant where a string constant is
+required (and AFAICT, the SQL "standard" [is there any standard more honored in
+the breach?] requires an error here).  But I also think this is another
+case where Rails' conventional thinking breaks down as soon as you do anything
+out of the ordinary: why isn't it looking at that column definition and casting
+the constant's value to a string in Ruby?
 
 ## What are the alternatives?
 
@@ -230,17 +236,17 @@ thinking breaks down as soon as you do anything out of the ordinary.
 [Mr. Karwin](http://stackoverflow.com/users/20860/bill-karwin) suggests that the
 whole approach of the gem is wrong, since it uses SQL in a non-relational
 manner.  But finding an alternative is complicated: this isn't the only
-polymorphic assocation on the Audited model. There are actually three:
+polymorphic assocation on the ``Audited`` model. There are three:
 
 * The ``auditable`` association to the object modified
 * The ``associated`` association to an object that the auditable object was associated with (to make it easier to find all changes to an object that has many associations, e.g., all order changes for a customer).
 * The ``user`` association to the party responsible for the change.
 
 Since SQL itself never mixes meta-data with data, all of these are out-of-band
-from the database's perspective: the associations only make sense to Rails
-code, not to general SQL users, visualization systems, etc., and they impose
-Rails conventions on any other user of the DBMS.  In our case, we don't care,
-but that only makes sense in a pure Rails shop.
+from the database's perspective: the associations only make sense to ActiveRecord,
+not to general SQL users, visualization systems, etc.
+In our case, we don't care --
+we don't access this database with anything other than ActiveRecord.
 
 Karwin suggests three alternatives:
 
@@ -248,27 +254,28 @@ Karwin suggests three alternatives:
 That'd work if MySQL could add columns responsibly (i.e., without locking the
 table and modifying every record), but MySQL (InnoDB) is just getting around to having
 implemented that 1988-vintage Oracle feature (in 5.6 we can avoid the lock but not the
-modifying every record). It might also require the
-``audited`` gem to get a little bit nosier about the declaration of
+time spent modifying every record). It might also require the
+``audited`` gem to get a bit more involved in the declaration of
 associations in its audited models.  This still relies on non-SQL constraint
 checking, since for the columns implementing each of the three associations,
-there can be only one non-NULL value. But foreign keys can at least be
+there can be only one non-NULL value. But foreign keys could be
 declared, and we still only have one audits table.
 * **Reverse the Relationship**: Create a
-table for each combination of types. This has the advantage of allowing
-proper SQL constraint checking, since each foreign key can be declared at the
-database level.
-This is the least likely to be surprising of the alternatives, since it also avoids the use
-of [NULL](http://www09.sigmod.org/sigmod/record/issues/0809/p23.grant.pdf).
-On the other hand, if we want to maintain an order of
-operation (`version`) across all the audits for a specific table, we have
-to use a multi-table sequence of some sort (no relying on ``AUTO_INCREMENT``).
+table for each combination of types. This has the advantage of allowing proper
+SQL constraint checking, since each foreign key can be declared at the database
+level.  From a query perspective, it's the alternative of least surprise, since
+it also avoids the use of
+[NULL](http://www09.sigmod.org/sigmod/record/issues/0809/p23.grant.pdf).  On
+the other hand, if we want to maintain an order of operation (`version`) across
+all the audits for a specific table, we have to use a multi-table sequence of
+some sort (no relying on ``AUTO_INCREMENT``). And every new auditable,
+association, or user class multiplies the number of migrations we have.
 * **Concrete Supertable**: If I understand this proposal correctly,
 the idea would be to create an 'auditables' table. Any creation of an auditable
 object (say `cases`) would also create one tuple in `auditables`.  Then to get
 the audits for my Case, I join through its `auditable` entry to get its audits.
 I.e., ``:case belongs_to :auditable``, and ``:auditable has_many :audits``. But how
-would those audits reference the other objects? Hmm. Still reading.
+would those audits reference the other objects? Hmm. [Still reading](https://pragprog.com/book/bksqla/sql-antipatterns).
 
 ### Avoid the ORM
 
@@ -309,20 +316,21 @@ Unfortunately, we can't easily move the application we have problems with from R
 I've been completely avoiding a major issue with the ``audited`` gem: what
 exactly does it record about a change in the Case model above?
 
-Well, it records changes to its rows. For any update, it records a JSON
-string representing a hash (dictionary), where for each field changed,
-there is a key for that field, and the value is either a scalar
+Well, it records changes to its instances. For any update, `audited` records a JSON
+string representing a hash (dictionary); that hash has
+a key for each changed field, and the value is either a scalar
 (for a change from NULL, including creation), or a two-entry array
 identifying the previous and new values.  How "relational" is that? By
 SQL's conventions, it's not relational at all. It's yet another melding
 of meta-data with data.
 
-So why use a relational DB to record it? One good reason: to avoid [two-phase
-commit](http://en.wikipedia.org/wiki/Two-phase_commit_protocol) while still
-maintaining consistency. That is, you want the every change audited, and you
-want to be certain that every audit represents a real change.  As soon as you
-use a second resource manager (message queue, document store, whatever), you
-have to deal with making both durable in a single atomic action.
+So why use a relational DB to record it? One good reason: to avoid
+[two-phase commit](http://en.wikipedia.org/wiki/Two-phase_commit_protocol)
+while still maintaining consistency. That is, you want the every change
+audited, and you want to be certain that every audit represents a real change.
+As soon as you use a second resource manager (message queue, document store,
+whatever), you have to deal with making both durable in a single atomic action
+(or recording reverses on rollbacks).
 
 Other than that, I can't think of any good reason. But, uh, I'm in the privacy
 business. Audits are important, so consistency is reason enough.

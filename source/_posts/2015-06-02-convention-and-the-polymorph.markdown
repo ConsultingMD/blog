@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Convention and the Polymorph"
+date: 2015-06-02 09:54:30 -0700
+comments: true
+categories: SQL, Rails, Auditing, Fiddler on the Roof
+author: Rick Cobb
+---
 
 # Polymorphic associations can drive you insane
 

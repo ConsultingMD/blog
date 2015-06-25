@@ -20,7 +20,7 @@ To make sure we can easily send credentials and lots of other useful files from 
 
 We'll start by making some configuration changes to postfix to setup gmail as our relay server and to configure postfix to authenticate and use TLS.  Here are the pertinent changes / additional lines in our `/etc/postfix/main.cf` to make this work:
 
-```postfix
+```bash
 myhostname = smtp.gmail.com
 mydomain = your_domain.com
 myorigin = $mydomain
@@ -75,7 +75,7 @@ EOT
 
 In our other window we should see some logging coming through:
 
-```postfix
+```bash
 Jun 19 15:57:11 MyMac.local postfix/master[69038]: daemon started -- version 2.11.0, configuration /etc/postfix
 Jun 19 15:57:11 MyMac.local postfix/pickup[69039]: 910AEC86481: uid=503 from=<Me>
 Jun 19 15:57:11 MyMac.local postfix/cleanup[69041]: 910AEC86481: message-id=<20150619218700.910AEC86481@smtp.gmail.com>
@@ -208,7 +208,7 @@ Our function takes 3 parameters:
 
 > 1. The filename to encrypt
 > 1. The email address of the user we want to send this to (This will also be used to identify the GPG key to be used for encryption)
-> 1. A comments / subject line for the email
+> 1. A comment / subject line for the email
 
 From there we create an encrypted copy of the file, adding our own and the recipient's keys and then email the encrypted copy of the file as an attachment.  I have this setup to BCC me with the email so that I have a record of what was sent out and confirmation that the message went through.
 

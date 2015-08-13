@@ -17,13 +17,13 @@ When you start requiring gems for API clients, argument parsing, and more, thoug
 
 ### Bundler to the rescue
 
-That's the kind of problem that [Bundler](http://bundler.io/) was built to solve. If you write Rails applications, you're probably familiar with the most common use case for Bundler: a project will include a `Gemfile` where gem dependencies are laid out, and Bundler provides commands that make it easy to install and maintain them. Fortunately, Bundler is also versatile enough to maintain your scripts' dependencies by packaging them as gems. The built-in generator makes the process easy.
+That's the kind of problem that RubyGems and [Bundler](http://bundler.io/) were built to solve. If you write Rails applications, you're probably familiar with the most common use case for Bundler: a project will include a `Gemfile` where gem dependencies are laid out, and Bundler provides commands that make it easy to install and maintain them. Fortunately, it's also versatile enough to help maintain your scripts' dependencies by packaging them as gems. The built-in generator makes the process easy.
 
-What follows is a quick & dirty guide to turning a standalone script into a gem.
+What follows is a quick & dirty guide to turning a standalone script into a gem. There's a lot more to gems than I'll cover here, but if you just want a way to get a script's dependencies under control, this gets the job done.
 
 # An example
 
-Here's a script I wrote that uses the Tracker API to list the ten biggest feature stories by estimated number of points.
+Here's a script I wrote that uses the Tracker API to list the ten biggest stories in a project.
 
 ```ruby
 #!/usr/bin/env ruby

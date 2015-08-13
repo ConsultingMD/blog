@@ -55,7 +55,7 @@ end
 
 To turn this into a gem, I'll use the [`bundle gem`](http://bundler.io/bundle_gem.html) command to generate a skeleton for the project.
 
-```
+```text
 $ bundle gem --edit --bin bigstories
 Creating gem 'bigstories'...
       create  bigstories/Gemfile
@@ -98,7 +98,7 @@ The gem is ready to install, and all I had to do was
 
 To install the gem locally, I'll run
 
-```
+```text
 $ rake install
 bigstories 0.1.0 built to pkg/bigstories-0.1.0.gem.
 bigstories (0.1.0) installed.
@@ -106,7 +106,7 @@ bigstories (0.1.0) installed.
 
 That's it. My `bigstories` gem is installed and ready to go:
 
-```
+```text
 $ bigstories
 3 - Apply styling to all shopper facing parts of the site, based on assets from designer
 3 - Shopper should be able to search for product

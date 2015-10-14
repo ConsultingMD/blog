@@ -12,7 +12,7 @@ The history of your command-line can be an invaluable resource to look back thro
 
 We know we should all start with our automation tools, but sometimes it is easier or more expedient just to get that new server up and running and tweaked and working with a bunch of command-line-fu.  Other times it is new territory and you need to so some trial and error, or experimentation before you're ready to automate.  Once you do have things working, that history file is a fantastic starting place to use to go back and write those puppet modules, or create a script or utility to capture and make repeatable what you've just done. Too many times I've had multiple bash sessions open or killed a terminal session without thinking and had that history lost or clobbered.
 
-Somewhere along the way I stumbled across a tweet from [@michaelhoffman](https://twitter.com/michaelhoffman https://twitter.com/michaelhoffman/status/639178145673932800) for a great method of handling history files to make sure you always have the full history for every terminal session you ever have.
+Somewhere along the way I stumbled across a tweet from [@michaelhoffman](https://twitter.com/michaelhoffman) for a great method of handling history files to make sure you always have the full history for every terminal session you ever have.
 
 ##[The Short Short Version:](https://en.wikiquote.org/wiki/Spaceballs#Dialogue)
 
@@ -61,7 +61,7 @@ In case our shell session ends abruptly we want to make sure things are making i
 ```bash
 export PROMPT_COMMAND='history -a'
 ```
-Okay this is where the real magic comes in.  Again, all credit to [@michaelhoffman](https://twitter.com/michaelhoffman https://twitter.com/michaelhoffman/status/639178145673932800) for this next bit.  We set our history filename in the format `Year/Month/Day.Hour.Minute.second_hostname_ShellProcessID`  The result will be a hierarchical folder tree with our history broken out into individual files by session and grouped into folders by month and months rolled up into folders by year.
+Okay this is where the real magic comes in.  Again, all credit to [@michaelhoffman](https://twitter.com/michaelhoffman/status/639178145673932800) for this next bit.  We set our history filename in the format `Year/Month/Day.Hour.Minute.second_hostname_ShellProcessID`  The result will be a hierarchical folder tree with our history broken out into individual files by session and grouped into folders by month and months rolled up into folders by year.
  
 
 

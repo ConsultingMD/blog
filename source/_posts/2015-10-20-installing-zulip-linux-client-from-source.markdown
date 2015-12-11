@@ -8,7 +8,7 @@ categories: tools, general-stuff
 ---
 
 We started using the newly-released [Zulip](https://zulip.org/) at Grand Rounds
-recently, as it gives us full HIPPA-complience and in my opinion a great chat
+recently, as it gives us full HIPAA-complience and in my opinion a great chat
 experience. I have been using their Linux client, which I prefer over the
 browser-based client due to it being an Alt-Tab away as opposed
 to buried in the middle of a bunch of browser tabs.

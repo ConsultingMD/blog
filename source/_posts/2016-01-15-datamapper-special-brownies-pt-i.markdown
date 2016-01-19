@@ -73,7 +73,7 @@ Wat.
 Five mins of wat-ing, printing out ```pet_shop_boys_cats```, counting to ten. I must be missing something, or
 am really dumb.
 
-Trying to examine this, what's the fifth cat?
+Trying to examine this, what's the sixth cat?
 
 ```
   pry(main)> pet_shop_boys_cats[5]
@@ -83,7 +83,7 @@ Trying to examine this, what's the fifth cat?
 Makes sense, but since it's telling me there are twenty three cats, what's the twentieth?
 
 ```
-  pry(main)> pet_shop_boys_cats[20]
+  pry(main)> pet_shop_boys_cats[19]
   => nil
 ```
 

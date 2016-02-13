@@ -1,13 +1,11 @@
 ---
 layout: post
-title: "SOA on Rails: Part 1"
+title: "SOA on Rails Pt. 1: Intro"
 date: 2016-02-09 15:40:45 -0700
 comments: false
 author: Rahmal Conda
 categories: SOA, Rails, Ruby, Web Services
 ---
-
-# SOA on Rails: Part 1 - Intro
 
 > *“When you hit the Amazon.com gateway, the application calls more than one hundred services to collect data and construct the page for you.”* **- Werner Vogels, Amazon CTO**
 
@@ -100,7 +98,7 @@ I’d say the most important reason is scalability. Each of our services can be 
 ### Next:
 Now that the *What* and the *Why* are clear. Let start putting the pieces together. 
 
-**SOA on Rails: Part 2** *- SOA Concepts in Rails*
+**SOA on Rails Pt. 2:** *Web Services in Rails*
 
 
 [monolith1]: https://s3.amazonaws.com/grnds-uat-blog/soa/monolith01.png "Rails Monolith 1"

@@ -29,12 +29,16 @@ Even if they couldn’t guess what Bezos’ mandate would mean for them at the t
 ## What Came Before
 ### Big Bad Monolith (The Ol’ Days)
 A few years after Bezos’ Mandate, a small band of opinionated ruby developers were releasing Rails into the ether and introducing Ruby to the ways of the distributed system and the enterprise architecture. Their first attempt didn’t break any records, but through a small but dedicated (and growing) following. Rails muscled its way into the mainstream. Most Rails apps at the time were small MVC stacks on top of a single database, on which the application depended heavily. This was a big flaw that was rather obvious, but forgiven because of Rails’ seemingly magical ability to produce a complete, functional, though a bit brittle) web stack with a trivial amount of time and effort.
- 
-<center>![Monolith 1](https://s3.amazonaws.com/grnds-uat-blog/soa/monolith01.png)</center>
+
+<center>
+![monolith01](http://i.imgur.com/n5RMgxy.png)
+</center>
 
 Don't get me wrong. The Rails community, along with developers of *Ruby Gems* and of other related technologies such as *Passenger (ModRails), Nginx, Memcached, PostgreSQL, MySQL*, and many others worked tirelessly worked to make Rails the center of a scalable multi-tiered platform worthy of even the most sophisicated application architectures. With the help of Load balancers and other scaling strategies, many developers have found success with more traditional Rails stacks.
 
-<center>![Monolith 2](https://s3.amazonaws.com/grnds-uat-blog/soa/monolith02.png)</center>
+<center>
+![monolith02](http://i.imgur.com/sCShCNh.png)
+</center>
 
 Common Rails deployments, even those that have not fully embraced SOA, have service-oriented modules within the web and application layers. For instance, Rails controllers conventionally implements RESTful endpoints for their resources. And ModRails has favored a threaded approach to allow many app instances to run concurrently. However, encapsulation has been mostly a province of the code layer.
 
@@ -47,7 +51,7 @@ Don’t feel bad if your app still looks like that. Everyone starts out like tha
 Web services are self-contained, modular, distributed, web applications that can be described, published, located and/or invoked over a network to execute some action specified in the request. These applications are ideally small, representing a single, specific function or domain model. Distributed over a network and usually web-based, they can be internal, with some managing application as the primary consumer or other services acting as clients. They can also be external and web-facing, accepting requests from 3rd-party client applications (Facebook API, Twitter, and Google Maps come to mind). Regardless, they are all built on top of open standards such as TCP/IP, HTTP, JSON, and XML. Well, that’s what I heard anyway. 
 
 <center>
-![Web Service](https://s3.amazonaws.com/grnds-uat-blog/soa/service01.png)
+![service01](http://i.imgur.com/kFIm1H9.png)
 </center>
 
 ### API (The Contract):
@@ -57,7 +61,7 @@ In order to provide the service for which it is intended, a web service needs se
 The client and service talk to each other via messages. Clients send a request to the server, and the server replies with a response. Apart from the actual data, these messages also contain metadata (HTTP Method, headers, etc.) about the message. The structure of the message depends in large part on the protocol the service implements.
 
 <center>
-![Web Service Messaging](https://s3.amazonaws.com/grnds-uat-blog/soa/service02.png)
+![service02](http://i.imgur.com/flAqy24.png)
 </center>
 
 The two most common protocols are SOAP and REST (with REST emerging as the clear frontrunner in later years). The figure below shows a simple RESTful web service using JSON as the message format. I’ll get into them more later, but I’ll summarize the difference like this:
@@ -67,7 +71,7 @@ The two most common protocols are SOAP and REST (with REST emerging as the clear
 **REST** - A RESTful web service is the triumph of convention over configuration, given that its contract is implicit. It provides no detailed description, because the request’s envelope is the contract. To be RESTful, a service must adhere to the HTTP protocol and its resource-based methodologies. Most would say that what REST sacrifices in control, it more than makes up for in simplicity and maintainability.
 
 <center>
-![SOAP vs REST](https://s3.amazonaws.com/grnds-uat-blog/soa/service03.png)
+![service03](http://i.imgur.com/tw0cp2C.png)
 </center>
 
 ## What is a Services-Oriented Architecture (SOA)
@@ -75,7 +79,7 @@ The two most common protocols are SOAP and REST (with REST emerging as the clear
 SOA is a distributed software architecture designed to facilitate the communication, interaction, and collaboration of loosely-coupled, self-contained web services. Like traditional multi-tiered architectures, SOA is based on a strategy wherein software components are distributed across a network. SOA, however tries to represent business processes and domains as shared, reusable components that can be combined in different ways. Service-orientation takes much of its inspiration and many of its principles from object-orientation. Just as with object-orientation, concepts such as encapsulation, abstraction, and reusability are fundamental to the composition of services within the SOA platform. 
 
 <center>
-![Simple Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack01.png)
+![stack01](http://i.imgur.com/n1nITl2.png)
 </center>
 
 ### Separation of Concerns:
@@ -85,7 +89,7 @@ The concept described by the phrase Separation of Concerns, is essentially a met
 While 3rd-party provider services are well-known, Grand Rounds has mainly implemented the internal services. We maintain several domain-driven web services, handling requests from our main web application and other existing web services. We do employ some provider APIs, such as bulk mail and analytics, for example, but it is the internal type I will be discussing in this article. All of our services are self-contained, compact Rails applications. The only exceptions are a few Sinatra apps running internal, non-critical processes. Our frontend UI and our mobile applications are clients to these services. Some talk directly to the clients returning data and other resources, but most are asynchronous, and event-driven in nature. A high-level, extremely simplified view our system would look like this:
 
 <center>
-![Our Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack02.png)
+![stack02](http://i.imgur.com/JkkkupZ.png)
 </center>
 
 ## Why SOA
@@ -93,7 +97,7 @@ While 3rd-party provider services are well-known, Grand Rounds has mainly implem
 Let’s take a look at a simple SOA architecture. Then we can see what benefits we can glean by comparing the Monolithic approach we started with. Here’s our platform. What have we gained by moving to this approach. 
 
 <center>
-![SOA Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack03.png)
+![stack03](http://i.imgur.com/bCBQ1Px.png)
 </center>
 
 Each service becomes a surprisingly simple component of a complex application platform. Independently, they focus on a single task, but together they form an aggregate application that is both fast and durable. Able to carry larger loads, and yet absorb more losses. The termination a single worker process or a single server instance doesn’t cripple the larger application as a whole.

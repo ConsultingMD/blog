@@ -82,7 +82,7 @@ While 3rd-party provider services are well-known, Grand Rounds has mainly implem
 ### Benefits:
 Let’s take a look at a simple SOA architecture. Then we can see what benefits we can glean by comparing the Monolithic approach we started with. Here’s our platform. What have we gained by moving to this approach. 
 
-![stack03](http://i.imgur.com/bCBQ1Px.png"></center>
+<center><img src="http://i.imgur.com/bCBQ1Px.png"></center>
 
 Each service becomes a surprisingly simple component of a complex application platform. Independently, they focus on a single task, but together they form an aggregate application that is both fast and durable. Able to carry larger loads, and yet absorb more losses. The termination a single worker process or a single server instance doesn’t cripple the larger application as a whole.
 

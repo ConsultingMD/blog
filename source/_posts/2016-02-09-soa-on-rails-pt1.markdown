@@ -46,7 +46,9 @@ Don’t feel bad if your app still looks like that. Everyone starts out like tha
 ### Working Behind The Scenes
 Web services are self-contained, modular, distributed, web applications that can be described, published, located and/or invoked over a network to execute some action specified in the request. These applications are ideally small, representing a single, specific function or domain model. Distributed over a network and usually web-based, they can be internal, with some managing application as the primary consumer or other services acting as clients. They can also be external and web-facing, accepting requests from 3rd-party client applications (Facebook API, Twitter, and Google Maps come to mind). Regardless, they are all built on top of open standards such as TCP/IP, HTTP, JSON, and XML. Well, that’s what I heard anyway. 
 
-<center>![Web Service](https://s3.amazonaws.com/grnds-uat-blog/soa/service01.png)</center>
+<center>
+![Web Service](https://s3.amazonaws.com/grnds-uat-blog/soa/service01.png)
+</center>
 
 ### API (The Contract):
 In order to provide the service for which it is intended, a web service needs several things. It needs a publisher or broker so clients can find it. But knowing where to send the envelope is only the beginning. Clients also need to know how to communicate with the service. The Service Contract is the means by which a service communicates its API to potential clients. An Application Program Interface (API) specifies how software components should communicate and interact. It describes the location, scheme, protocol, and functions used by a service to accept and process requests, as well as prepare and return responses. 
@@ -54,7 +56,9 @@ In order to provide the service for which it is intended, a web service needs se
 ### Messaging (The Transaction):
 The client and service talk to each other via messages. Clients send a request to the server, and the server replies with a response. Apart from the actual data, these messages also contain metadata (HTTP Method, headers, etc.) about the message. The structure of the message depends in large part on the protocol the service implements.
 
-<center>![Web Service Messaging](https://s3.amazonaws.com/grnds-uat-blog/soa/service02.png)</center>
+<center>
+![Web Service Messaging](https://s3.amazonaws.com/grnds-uat-blog/soa/service02.png)
+</center>
 
 The two most common protocols are SOAP and REST (with REST emerging as the clear frontrunner in later years). The figure below shows a simple RESTful web service using JSON as the message format. I’ll get into them more later, but I’ll summarize the difference like this:
 
@@ -62,13 +66,17 @@ The two most common protocols are SOAP and REST (with REST emerging as the clear
 
 **REST** - A RESTful web service is the triumph of convention over configuration, given that its contract is implicit. It provides no detailed description, because the request’s envelope is the contract. To be RESTful, a service must adhere to the HTTP protocol and its resource-based methodologies. Most would say that what REST sacrifices in control, it more than makes up for in simplicity and maintainability.
 
-<center>![SOAP vs REST](https://s3.amazonaws.com/grnds-uat-blog/soa/service03.png)</center>
+<center>
+![SOAP vs REST](https://s3.amazonaws.com/grnds-uat-blog/soa/service03.png)
+</center>
 
 ## What is a Services-Oriented Architecture (SOA)
 ### Concepts and Methodology
 SOA is a distributed software architecture designed to facilitate the communication, interaction, and collaboration of loosely-coupled, self-contained web services. Like traditional multi-tiered architectures, SOA is based on a strategy wherein software components are distributed across a network. SOA, however tries to represent business processes and domains as shared, reusable components that can be combined in different ways. Service-orientation takes much of its inspiration and many of its principles from object-orientation. Just as with object-orientation, concepts such as encapsulation, abstraction, and reusability are fundamental to the composition of services within the SOA platform. 
 
-<center>![Simple Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack01.png)</center>
+<center>
+![Simple Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack01.png)
+</center>
 
 ### Separation of Concerns:
 The concept described by the phrase Separation of Concerns, is essentially a methodology that attempts to break large applications into a set of individually defined functions or "concerns." The logic required to address or solve the larger problem can then be broken down into individual units of logic that address specific concerns. Many design patterns and distributed architectures have applied this concept in different ways. SOA has uniquely evolved out of an ambition to realize a separation of concerns among stand-alone services that can then be accessed and reused by multiple applications. For example, an “Authentication” service can be used for single-signon into numerous applications. Or a “PDF Generation” service can be used by a banking platform to generate invoices or render banks statements. Hell, we could spend all week coming up with ways an email scheduling service could be used any application… but I digress
@@ -76,13 +84,17 @@ The concept described by the phrase Separation of Concerns, is essentially a met
 ### OUR SOA Platform (At a Glance)
 While 3rd-party provider services are well-known, Grand Rounds has mainly implemented the internal services. We maintain several domain-driven web services, handling requests from our main web application and other existing web services. We do employ some provider APIs, such as bulk mail and analytics, for example, but it is the internal type I will be discussing in this article. All of our services are self-contained, compact Rails applications. The only exceptions are a few Sinatra apps running internal, non-critical processes. Our frontend UI and our mobile applications are clients to these services. Some talk directly to the clients returning data and other resources, but most are asynchronous, and event-driven in nature. A high-level, extremely simplified view our system would look like this:
 
-<center>![Our Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack02.png)</center>
+<center>
+![Our Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack02.png)
+</center>
 
 ## Why SOA
 ### Benefits:
 Let’s take a look at a simple SOA architecture. Then we can see what benefits we can glean by comparing the Monolithic approach we started with. Here’s our platform. What have we gained by moving to this approach. 
 
-<center>![SOA Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack03.png)</center>
+<center>
+![SOA Stack](https://s3.amazonaws.com/grnds-uat-blog/soa/stack03.png)
+</center>
 
 Each service becomes a surprisingly simple component of a complex application platform. Independently, they focus on a single task, but together they form an aggregate application that is both fast and durable. Able to carry larger loads, and yet absorb more losses. The termination a single worker process or a single server instance doesn’t cripple the larger application as a whole.
 

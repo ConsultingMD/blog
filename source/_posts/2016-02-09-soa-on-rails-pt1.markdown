@@ -22,7 +22,7 @@ About 15 years ago, back when Amazon was just an online bookseller, Jeff Bezos, 
 
     5. All service interfaces, without exception, must be designed from the ground up to be externalizable. That is to say, the team must plan and design to be able to expose the interface to developers in the outside world. No exceptions.
 
-Bezos end his mandate with this: ***Anyone who doesn’t do this will be fired.  Thank you; have a nice day!***
+Bezos ended his mandate with this: ***Anyone who doesn’t do this will be fired.  Thank you; have a nice day!***
 
 Even if they couldn’t guess what Bezos’ mandate would mean for them at the time, No one can dispute the results. Nor can anyone deny that Bezos was years ahead of the curve. Does anyone think of Amazon as a bookseller now?
 

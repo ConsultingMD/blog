@@ -10,7 +10,7 @@ categories: SOA, Rails, Ruby, Web Services
 > *“When you hit the Amazon.com gateway, the application calls more than one hundred services to collect data and construct the page for you.”* **- Werner Vogels, Amazon CTO**
 
 ## Amazon's Mandate
-About 15 years ago, back when Amazon was just an online bookseller, Jeff Bezos, Founder and CEO, gave every team at Amazon a mandate: ***To rebuild Amazon’s infrastructure into a Service-Oriented Architecture from top to bottom. but this is around 2001.*** The term SOA hadn’t even been invented yet. So what exactly did Bezos ask his teams to do? This is the mandate as expressed by Jeff Bezos:
+About 15 years ago, back when Amazon was just an online bookseller, Jeff Bezos, Founder and CEO, gave every team at Amazon a mandate: ***To rebuild Amazon’s infrastructure into a Service-Oriented Architecture from top to bottom.*** But this is around 2001. The term SOA hadn’t even been invented yet. So what exactly did Bezos ask his teams to do? This is the mandate as expressed by Jeff Bezos:
 
     1. All teams will henceforth expose their data and functionality through service interfaces.
 
@@ -28,7 +28,7 @@ Even if they couldn’t guess what Bezos’ mandate would mean for them at the t
 
 ## What Came Before
 ### Big Bad Monolith (The Ol’ Days)
-A few years after Bezos’ Mandate, a small band of opinionated ruby developers were releasing Rails into the ether and introducing Ruby to the ways of the distributed system and the enterprise architecture. Their first attempt didn’t break any records, but through a small but dedicated (and growing) following. Rails muscled its way into the mainstream. Most Rails apps at the time were small MVC stacks on top of a single database, on which the application depended heavily. This was a big flaw that was rather obvious, but forgiven because of Rails’ seemingly magical ability to produce a complete, functional, though a bit brittle) web stack with a trivial amount of time and effort.
+A few years after Bezos’ Mandate, a small band of opinionated ruby developers were releasing Rails into the ether and introducing Ruby to the ways of the distributed system and the enterprise architecture. Their first attempt didn’t break any records, but through a small but dedicated (and growing) following. Rails muscled its way into the mainstream. Most Rails apps at the time were small MVC stacks on top of a single database, on which the application depended heavily. This was a big flaw that was rather obvious, but forgiven because of Rails’ seemingly magical ability to produce a complete, functional (though a bit brittle) web stack with a trivial amount of time and effort.
 
 <center><img src="http://i.imgur.com/n5RMgxy.png"></center>
 

@@ -27,7 +27,7 @@ git clone git@github.com:zulip/zulip-desktop.git
 cd zulip-desktop/
 mkdir build
 cd build
-cmake ..
+cmake -DBUILD_WITH_QT5=On ..
 make
 
 # run it

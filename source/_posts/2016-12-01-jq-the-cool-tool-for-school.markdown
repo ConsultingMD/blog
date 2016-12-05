@@ -6,12 +6,12 @@ comments: true
 author: "Wen Li <wen.li@grandrounds.com>"
 categories: tooling, cli
 ---
-There’s something about using a good tool for the need. If you deal with JSON and you haven’t played with jq , you’re in for a real treat.
+There's something incredibly satisfying about finding the perfect tool for a job. If you deal with JSON and you haven’t played with jq, you’re in for a real treat.
 
 
 The description from their [site](https://stedolan.github.io/jq/) states, 
 
-> “jq is like sed for JSON data - you can use it to slice and filter and map and transform structured data with the same ease that sed, awk,grep and friends let you play with text… …jq can mangle the data format that you have into the one that you want with very little effort, and the program to do so is often shorter and simpler than you’d expect.”
+> “jq is like sed for JSON data - you can use it to slice and filter and map and transform structured data with the same ease that sed, awk, grep and friends let you play with text… …jq can mangle the data format that you have into the one that you want with very little effort, and the program to do so is often shorter and simpler than you’d expect.”
 
 
 I’ll go over a few use cases I’ve had for it so far.
@@ -39,7 +39,7 @@ This is also especially useful when you want to validate JSON and the data could
 Have you ever had to diff a large piece of JSON with another JSON only to find out that the keys are in a different order? Your tooling tells you that all of the things are not like the others which ends up not being useful at all. 
 
 
-My generated CloudFormation template keys were in a completely different order than GetTemplate from the current stack and I needed a way tell what the delta between the two was. The `-S` or `--sort-keys` option will sort the keys of your hash all the way down so that two sorted equivalent hashes will be identical. Knowing that, I was able to create two sorted files and diff them from there.
+My generated CloudFormation template keys were in a completely different order than GetTemplate from the current stack, and I needed a way tell what the delta between the two was. The `-S` or `--sort-keys` option will sort the keys of your hash all the way down so that two sorted equivalent hashes will be identical. Knowing that, I was able to create two sorted files and diff them from there.
 
 `cat actual.json | jq -S . > asorted.json`
 

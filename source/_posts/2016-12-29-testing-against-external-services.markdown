@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Testing Against External Services"
+title: "Learning to Sight Along the Space Capsule"
 date: 2016-12-29 12:07:07 -0800
 comments: true
 author: "Lindsey Anne <lindsey.hogg@grandrounds.com>"
@@ -18,7 +18,7 @@ The previous test suite for this service used a gem that was originally created 
 
 So, after creating a plan of attack, I rewrote or deleted every single test that used this gem. Each test was also re-evaluated for "sighting along the space capsule," as Sandi Metz calls it. Any test that was written for a private method, a message sent to the object’s self, or an implementation detail was scrutinized (and most of them deleted), which exposed the true underlying issue: almost every single test we'd written that used the gem was an *implementation* test, not an *interface* test.
 
-External responses are supposed to be completely mocked out in unit testing, not make actual calls to an API or server. Tests exist to make sure *our* code works as expected, not to verify that no errors are raised when making external requests. A unit test that requires a response from an outside source is already a broken test; save those for integration tests instead. 
+External responses are supposed to be completely mocked out in unit testing, not make actual calls to an API or server. Tests exist to make sure *our* code works as expected, not to verify that no errors are raised when making external requests. A unit test that requires a response from an outside source is already a broken test; save those for integration tests instead.
 
 ##### Reframing our point of view
 
@@ -52,7 +52,7 @@ Now, one option for testing this is the way we did it before, something like thi
       # shut down the server
     end
 
-On the surface, this doesn’t look terrible. It’s testing the value returned from `getListOfFiles`, right? Yay, that’s what we want! But... not quite. We’ve started a real server, and we hope that a) it started in time for our tests to run, and b) it doesn’t fail or raise any errors, and that’s how our test will pass. Instead, we need to `allow` a mocked response and set up our expectation this way:
+On the surface, this doesn’t look terrible. It’s testing the value returned from `getListOfFiles`, right? Yay, that’s what we want! But... not quite. We’ve started a real server, and we hope that a) it started in time for our tests to run, and b) it doesn’t fail or raise any errors, which is how our tests will pass. Instead, we need to `allow` a mocked response and set up our expectation this way:
 
     let(:mock_connection) { double(‘ftp’) }
     let(:ftp_thing) { FtpThing.new }

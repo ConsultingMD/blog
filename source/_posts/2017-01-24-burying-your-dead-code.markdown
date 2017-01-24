@@ -27,7 +27,7 @@ The specific service I was trying to clean up is one of our oldest repositories,
 `git bisect` is generally used for tracking down when a bug was introduced by using a binary search through as many commits as you'd like; you can start at the very beginning of your git history or somewhere in the middle. It checks out the repo at each commit, where you can test your issue and mark it as "good" or "bad." Rather than testing for a bug, though, I used it to `grep` for the method names that were appearing as dead from my previous step one at a time. If `grep` only gave one result (barring tests that might still exist), then nothing else was calling the method anymore and I'd mark it "bad." If it showed up with more results, I'd mark it "good." The point when searching for a bug is to find the last "good" commit before a bug was introduced; the point when using it to look for dead code is to track down when the consumer was removed.
 
 Here's an example to illustrate the steps you'll take to do the same thing:
-```bash
+```
 ~/my_repo [master] $ git bisect start
 ~/my_repo [master] $ git bisect bad
 ~/my_repo [master] $ git bisect good ecef47e2fefc4c8ac6f3a358a4961332d24a46e3

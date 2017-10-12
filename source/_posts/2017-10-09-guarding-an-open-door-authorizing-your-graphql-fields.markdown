@@ -69,7 +69,7 @@ class AuthorizationAnalyzer
   def call(memo, visit_type, irep_node)
   end
 
-  # Called when we're done the whole visit.
+  # Called when we're done with the whole visit.
   # The return value may be a GraphQL::AnalysisError (or an array of them).
   # Or, you can use this hook to write to a log, etc
   def final_value(memo)

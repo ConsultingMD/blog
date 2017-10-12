@@ -121,7 +121,7 @@ Checking for the right permissions goes something like this:
 def call(memo, visit_type, irep_node)
   current_user = irep_node.query.context[:current_user]
   requested_node_name = irep_node.definition.name.to_sym
-  ability = Ability.new(current_user) # Using CanCan
+  ability = Ability.new(current_user) # Using CanCanCan
   memo[:unauthorized_nodes] ||= []
   memo[:unauthorized_nodes] << irep_node if ability.cannot?(:access, requested_node_name)
   memo
@@ -179,7 +179,7 @@ We can take the `User` instance and authorize against it before returning anythi
 
 ```ruby
 resolve ->(obj, args, ctx) {
-  ability = Ability.new(ctx[:current_user]) # Using CanCan
+  ability = Ability.new(ctx[:current_user]) # Using CanCanCan
   user = User.find(args[:id])
   return user if ability.can?(:read, user)
   nil
@@ -202,7 +202,7 @@ If our resolver looks like this:
 
 ```ruby
 resolve ->(obj, args, ctx) {
-  ability = Ability.new(ctx[:current_user]) # Using CanCan
+  ability = Ability.new(ctx[:current_user]) # Using CanCanCan
   user = User.find(args[:id])
   user.update_attributes(args[:input]) # "You got hacked!"
   return user if ability.can?(:update, user) # false
@@ -214,7 +214,7 @@ resolve ->(obj, args, ctx) {
 
 ```ruby
 resolve ->(obj, args, ctx) {
-  ability = Ability.new(ctx[:current_user]) # Using CanCan
+  ability = Ability.new(ctx[:current_user]) # Using CanCanCan
   user = User.find(args[:id])
   if ability.can?(:update, user) # false
     user.update_attributes(args[:input])

@@ -8,7 +8,7 @@ categories: automation
 ---
 My first project here at Grand Rounds was to pick up one of my favorite topics of IT and operations 
 in general: on-call rotations!  Making sure we have accurate alarming and alerting never seems like the
-most glamours work in the world, but it is often very important and highly impactful.
+most glamorous work in the world, but it is often very important and highly impactful.
 
 To that end, as with most things, we want to start with a data-driven approach to identifying and resolving
 our problems.  This is a pattern that I've used several times over the years for a fun little hack which
@@ -42,6 +42,7 @@ class GrootHTTPClient
   @url
   @headers
 
+  attr_accessor :url, :headers
   def initialize
     @url = get_url
     @headers = get_headers
@@ -62,6 +63,7 @@ class ConfluenceClient < GrootHTTPClient
   @username
   @password
 
+  attr_accessor :username, :password
   def initialize
     @username = ENV['JIRA_USERNAME'] ||= DEFAULT_USERNAME
     @password = ENV['JIRA_PASSWORD'] ||= File.read(format('%s/.wiki_pass', ENV['HOME'])).chomp
@@ -87,7 +89,7 @@ class ConfluenceClient < GrootHTTPClient
 
   def get_page(space_key, title)
     params = { spaceKey: space_key, title: title, expand: 'version,body.view,space' }
-    param_str = params.map{|k,v| format('%s=%s', k, URI.encode(v))}.join('&')
+    param_str = params.map { |k,v| format('%s=%s', k, URI.encode(v)) }.join('&')
     uri = format('%s/rest/api/content?%s', @url, param_str)
     Log.debug(format('URI: %s', uri))
     res = RestClient.get(uri, @headers)
@@ -130,6 +132,7 @@ Now let's build a quick and dirty client for PagerDuty:
 class PDClient
   @key
 
+  attr_accessor :key
   def initialize( key )
     @key = key
   end
@@ -177,7 +180,7 @@ class PDClient
 end
 ```
 
-Pretty simple code here.  Basically we're going to use this to get a current page, and then update the page later on.  Now let's tie this all together with a Rake task:
+Pretty simple code here.  Basically we're going to use this to get a current page, and then update the page later on.  Now lets tie this all together with a Rake task:
 
 ```ruby
 desc 'Create a report on incidents based on services.'

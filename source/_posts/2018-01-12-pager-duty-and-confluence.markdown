@@ -121,7 +121,7 @@ class ConfluenceClient < GrootHTTPClient
 end
 ```
 
-Now lets build a quick and dirty client for PagerDuty:
+Now let's build a quick and dirty client for PagerDuty:
 
 ```ruby
 class PDClient

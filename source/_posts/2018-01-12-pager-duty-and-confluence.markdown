@@ -6,7 +6,7 @@ comments: true
 author: "Bryan Kroger bryan.kroger@grandrounds.com"
 categories: automation
 ---
-My first project here at Ground Rounds was to pick up one of my favorite topics of IT and operations 
+My first project here at Grand Rounds was to pick up one of my favorite topics of IT and operations 
 in general: on-call rotations!  Making sure we have accurate alarming and alerting never seems like the
 most glamours work in the world, but it is often very important and highly impactful.
 

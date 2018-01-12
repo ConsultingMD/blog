@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Pager Duty and Confluence"
+title: "PagerDuty and Confluence"
 date: 2018-01-12 18:19:49 +0000
 comments: true
 author: "Bryan Kroger bryan.kroger@grandrounds.com"
@@ -28,10 +28,6 @@ Viable Product ( MVP ) which allows us to prove out a business case.
 In this case we will prove out the value of incident reporting data.  This is a perfect example of a product
 that is valuable today, but becomes less valuable over time because it allows us to refine a process.
 
-We fully expect that some day this data will be effictively useless and thus this code will be thrown
-away.  However, the value of this code today is in it's ability to give us insights that we can act on
-today.
-
 We start this with a high-level HTTPClient.  Our nickname for this is called Groot: 
 Grand Rounds Operational and Organizational Tool.  We're all fans of the comic books over here, 
 so we often name our projects after Marvel characters.  I haven't seen anything from the DC 
@@ -56,7 +52,7 @@ class GrootHTTPClient
 end
 ```
 
-This is a very simply little base class to get us started.  Now let's build a specific client on top of this:
+This is a very simple little base class to get us started.  Now let's build a specific client on top of this:
 
 ```ruby
 class ConfluenceClient < GrootHTTPClient
@@ -120,13 +116,12 @@ class ConfluenceClient < GrootHTTPClient
     headers = @headers
     headers['Accept'] = 'application/json'
     headers['Content-Type'] = 'application/json'
-    r = RestClient.put(uri, params.to_json, headers)
+    RestClient.put(uri, params.to_json, headers)
   end
 end
 ```
 
-Now let's build a quick and dirty client for PagerDuty:
-
+Now lets build a quick and dirty client for PagerDuty:
 
 ```ruby
 class PDClient
@@ -216,7 +211,7 @@ task :report_services do |t,args|
   page << '<ac:structured-macro ac:macro-id="c3c570b3-e820-4787-9242-05af79a10c55" ac:name="chart" ac:schema-version="1">'
   page << '<ac:parameter ac:name="3D">true</ac:parameter>'
   page << '<ac:parameter ac:name="width">500</ac:parameter>'
-  page << '<ac:parameter ac:name="title">Pager duty alerts by service.</ac:parameter>'
+  page << '<ac:parameter ac:name="title">PagerDuty alerts by service.</ac:parameter>'
   page << '<ac:parameter ac:name="legend">false</ac:parameter>'
   page << '<ac:parameter ac:name="type">bar</ac:parameter>'
   page << '<ac:parameter ac:name="height">350</ac:parameter>'

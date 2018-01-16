@@ -35,9 +35,6 @@ realm quite yet, but maybe someday.
 
 ```ruby
 class GrootHTTPClient
-  @url
-  @headers
-
   attr_accessor :url, :headers
   def initialize
     @url = get_url
@@ -56,9 +53,6 @@ This is a very simple little base class to get us started.  Now let's build a sp
 
 ```ruby
 class ConfluenceClient < GrootHTTPClient
-  @username
-  @password
-
   attr_accessor :username, :password
   def initialize
     @username = ENV['JIRA_USERNAME'] ||= DEFAULT_USERNAME
@@ -125,8 +119,6 @@ Now let's build a quick and dirty client for PagerDuty:
 
 ```ruby
 class PDClient
-  @key
-
   attr_accessor :key
   def initialize( key )
     @key = key
